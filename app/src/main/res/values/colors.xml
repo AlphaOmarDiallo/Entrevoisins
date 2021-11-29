@@ -7,5 +7,5 @@
     <color name="colorTextBlack">#000000</color>
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="colorStarGold">#fdca25</color>
-    <color name="colorStarGrey">#f5f5f5</color>
+    <color name="colorStarGrey">#dddddd</color>
 </resources>

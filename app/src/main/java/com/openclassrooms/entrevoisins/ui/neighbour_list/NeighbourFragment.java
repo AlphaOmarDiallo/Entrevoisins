@@ -1,11 +1,14 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.view.ViewGroup;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
+import com.openclassrooms.entrevoisins.events.OpenUserProfileEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -22,8 +26,17 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 
-public class NeighbourFragment extends Fragment {
+public class NeighbourFragment<TAG> extends Fragment {
 
+    private static final String TAG = "TAG";
+    private static final String NEIGHBOURID = "NEIGHBOURID";
+    private static final String NEIGHBOURNAME = "NEIGHBOURNAME";
+    private static final String NEIGHBOURAVATAR = "NEIGHBOURAVATAR";
+    private static final String NEIGHBOURADDRESS = "NEIGHBOURADDRESS";
+    private static final String NEIGHBOURPHONE = "NEIGHBOURPHONE";
+    private static final String NEIGHBOUREMAIL = "NEIGHBOUREMAIL";
+    private static final String NEIGHBOURABOUTME = "NEIGHBOURABOUTME";
+    private static final String NEIGHBOURINFAVOURITE = "NEIGHBOURINFAVOURITE";
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
@@ -90,4 +103,34 @@ public class NeighbourFragment extends Fragment {
         mApiService.deleteNeighbour(event.neighbour);
         initList();
     }
+
+    /**
+    * Fired if the user clicks on a profile picture
+     * @param event
+     */
+    @Subscribe
+    public void onOpenProfileNeighbour(OpenUserProfileEvent event) {
+        Log.e(TAG, "onOpenProfileNeighbour: OpenUser",null );
+        long neighbourID = event.neighbour.getId();
+        String neighbourName = event.neighbour.getName();
+        String neighbourAvatar = event.neighbour.getAvatarUrl();
+        String neighbourAddress = event.neighbour.getAddress();
+        String neighbourPhone = event.neighbour.getPhoneNumber();
+        String neighbourAboutMe = event.neighbour.getAboutMe();
+        String neighbourEmail = event.neighbour.getEmailAddress();
+        Boolean neighbourInFavourite = event.neighbour.getInFavourite();
+        Intent intentOpenUserProfile = new Intent(getActivity(), UserInformationActivity.class);
+        Bundle extras = new Bundle();
+        extras.putLong(NEIGHBOURID, neighbourID);
+        extras.putString(NEIGHBOURNAME, neighbourName);
+        extras.putString(NEIGHBOURADDRESS, neighbourAddress);
+        extras.putString(NEIGHBOURAVATAR, neighbourAvatar);
+        extras.putString(NEIGHBOURPHONE, neighbourPhone);
+        extras.putString(NEIGHBOURABOUTME, neighbourAboutMe);
+        extras.putString(NEIGHBOUREMAIL, neighbourEmail);
+        extras.putBoolean(NEIGHBOURINFAVOURITE, neighbourInFavourite);
+        intentOpenUserProfile.putExtras(extras);
+        startActivity(intentOpenUserProfile);
+    }
+
 }

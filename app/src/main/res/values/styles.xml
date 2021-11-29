@@ -17,4 +17,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="android:textColorSecondary">@color/colorTextWhite</item>
+        <item name="colorControlNormal">@color/colorTextWhite</item>
+        <item name="android:colorControlHighlight">@color/colorTextWhite</item>
+        <item name="android:colorControlActivated">@color/colorTextWhite</item>
+        <item name="android:colorControlNormal">@color/colorTextWhite</item>
+        <item name="colorButtonNormal">@color/colorTextWhite</item>
+    </style>
+
 </resources>

@@ -16,14 +16,20 @@ public class Neighbour {
     /** Avatar */
     private String avatarUrl;
 
-    /** Adress */
+    /** Address */
     private String address;
 
     /** Phone number */
     private String phoneNumber;
 
+    /** Email address */
+    private String emailAddress = "dummy@email.com";
+
     /** About me */
     private String aboutMe;
+
+    /** Is in favourite */
+    private Boolean isInFavourite = false;
 
     /**
      * Constructor
@@ -88,6 +94,23 @@ public class Neighbour {
     public void setAboutMe(String aboutMe) {
         this.aboutMe = aboutMe;
     }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public Boolean getInFavourite() {
+        return isInFavourite;
+    }
+
+    public void setInFavourite(Boolean inFavourite) {
+        isInFavourite = inFavourite;
+    }
+
 
     @Override
     public boolean equals(Object o) {

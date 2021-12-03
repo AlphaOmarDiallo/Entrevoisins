@@ -16,6 +16,7 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.OpenUserProfileEvent;
+import com.openclassrooms.entrevoisins.events.OpenUserProfileFromFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -24,13 +25,17 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-
-public class NeighbourFragment<TAG> extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link FavouriteNeighbourFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class FavouriteNeighbourFragment extends Fragment {
 
     private static final String TAG = "TAG";
     private static final String NEIGHBOUR = "NEIGHBOUR";
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
+    private List<Neighbour> mFavNeighbours;
     private RecyclerView mRecyclerView;
 
 
@@ -38,8 +43,8 @@ public class NeighbourFragment<TAG> extends Fragment {
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
      */
-    public static NeighbourFragment newInstance() {
-        NeighbourFragment fragment = new NeighbourFragment();
+    public static FavouriteNeighbourFragment newInstance() {
+        FavouriteNeighbourFragment fragment = new FavouriteNeighbourFragment();
 
         return fragment;
     }
@@ -65,8 +70,8 @@ public class NeighbourFragment<TAG> extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        mFavNeighbours = mApiService.getFavNeighbour();
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbours));
     }
 
     @Override

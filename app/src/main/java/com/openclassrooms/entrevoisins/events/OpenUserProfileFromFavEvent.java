@@ -2,10 +2,9 @@ package com.openclassrooms.entrevoisins.events;
 
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
-public class PassNeighbourInformationEvent {
-
+public class OpenUserProfileFromFavEvent {
     /**
-     * Neighbour data pass to UserInformation activity
+     * Neighbour data to open
      */
     public Neighbour neighbour;
 
@@ -14,7 +13,7 @@ public class PassNeighbourInformationEvent {
      * Constructor.
      * @param neighbour
      */
-    public PassNeighbourInformationEvent(Neighbour neighbour) {
+    public OpenUserProfileFromFavEvent(Neighbour neighbour) {
         this.neighbour = neighbour;
     }
 }

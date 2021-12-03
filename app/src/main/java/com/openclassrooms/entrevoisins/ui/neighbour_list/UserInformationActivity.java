@@ -1,33 +1,40 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.events.OpenUserProfileEvent;
-import com.openclassrooms.entrevoisins.events.PassNeighbourInformationEvent;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.squareup.picasso.Picasso;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserInformationActivity extends AppCompatActivity {
+
+    private static final String TAG = "TAG";
+    private boolean inFavourite;
+    long neighbourID; // = 0;
+    String neighbourName;
+    String neighbourAvatar;
+    String neighbourAddress;
+    String neighbourPhone;
+    String neighbourAboutMe;
+    String neighbourEmail;
+    private Neighbour mNeighbour = new Neighbour(neighbourID, neighbourName, neighbourAvatar, neighbourAddress, neighbourPhone, neighbourAboutMe, neighbourEmail);
+    private NeighbourApiService mApiService;
 
     @BindView(R.id.toolbarUserInfo)
     public Toolbar mToolbarUserInfo;
@@ -55,21 +62,16 @@ public class UserInformationActivity extends AppCompatActivity {
     public ImageView mImageViewPhone;
     @BindView(R.id.cardViewUserDescription)
     public CardView mCardViewUserDescription;
-    @BindView(R.id.tvAProposTitle)
-    public TextView mTextViewAProposTitle;
     @BindView(R.id.tvAProposDescription)
     public TextView mTextViewAProposDescription;
-
-    private boolean inFavourite = false;
-    private Neighbour mNeighbour;
-    private long mNeighbourID;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_information);
         ButterKnife.bind(this);
+        mApiService = DI.getNeighbourApiService();
+
         //toolbar settings
         setSupportActionBar(mToolbarUserInfo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,56 +85,57 @@ public class UserInformationActivity extends AppCompatActivity {
                 finish();
             }
         });
-        // retrieving data from EventBus
-        /** gets sticky data
-         * @param event
-         */
-      // @Subscribe
-      // public void onPassNeighbourInformationEvent (PassNeighbourInformationEvent event) {
 
+        // retrieving neighbour
+        mNeighbour = getIntent().getParcelableExtra("NEIGHBOUR");
+        neighbourID = mNeighbour.getId();
+        neighbourName =  mNeighbour.getName();
+        neighbourAvatar = mNeighbour.getAvatarUrl();
+        neighbourAddress = mNeighbour.getAddress();
+        neighbourPhone = mNeighbour.getPhoneNumber();
+        neighbourAboutMe = mNeighbour.getAboutMe();
+        neighbourEmail = mNeighbour.getEmailAddress();
+        boolean neighbourFavourite = mNeighbour.getInFavourite();
 
-      //  }
-        //retrieving data from intent
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        mTextViewUserName.setText(extras.getString("NEIGHBOURNAME"));
-        mTextViewCardViewName.setText(extras.getString("NEIGHBOURNAME"));
-        mTextViewCardViewAddress.setText(extras.getString("NEIGHBOURADDRESS"));
-        mTextViewPhoneNumber.setText(extras.getString("NEIGHBOURPHONE"));
-        mTextViewEmailAddress.setText(extras.getString("NEIGHBOUREMAIL"));
-        mTextViewAProposDescription.setText(extras.getString("NEIGHBOURABOUTME"));
-        inFavourite = extras.getBoolean("NEIGHBOURINFAVOURITE");
-        mNeighbourID = extras.getLong("NEIGHBOURID");
+        mTextViewUserName.setText(neighbourName);
+        mTextViewCardViewName.setText(neighbourName);
+        mTextViewCardViewAddress.setText(neighbourAddress);
+        mTextViewPhoneNumber.setText(neighbourPhone);
+        mTextViewEmailAddress.setText(neighbourEmail);
+        mTextViewAProposDescription.setText(neighbourAboutMe);
+        inFavourite = mNeighbour.getInFavourite();
+        Picasso.get().load(neighbourAvatar).into(mImageViewUserAvatar);
+        Log.d(TAG, "onCreate: " + inFavourite);
 
         setFavouriteFAB(inFavourite);
 
-        //Neighbour neighbour = (Neighbour) extras.getParcelable("NEIGHBOUR");
-
-        Picasso.get().load(extras.getString("NEIGHBOURAVATAR")).into(mImageViewUserAvatar);
 
     }
 
     @OnClick(R.id.fabAddToFavourite)
     public void addToFavourite() {
         //TODO - method ot add to favourite and change star color if in favourite, also add toast
-        if (inFavourite == false) {
+        if (!inFavourite) {
             inFavourite = true;
+            mNeighbour.setInFavourite(true);
+            mApiService.createFavNeighbour(mNeighbour);
+            Log.d(TAG, "addToFavourite: " + mNeighbour.getInFavourite());
         } else {
             inFavourite = false;
+            mNeighbour.setInFavourite(false);
+            mApiService.deleteFavNeighbour(mNeighbour);
+            Log.d(TAG, "addToFavourite: " + mNeighbour.getInFavourite());
         }
         setFavouriteFAB(inFavourite);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     @Override
     protected void onStop() {
-
         super.onStop();
     }
 
@@ -144,10 +147,5 @@ public class UserInformationActivity extends AppCompatActivity {
             mFloatingActionButton.setColorFilter(ContextCompat.getColor(context, R.color.colorStarGrey));
         }
     }
-
-    private void modifyUserInfo () {
-
-    }
-
 }
 

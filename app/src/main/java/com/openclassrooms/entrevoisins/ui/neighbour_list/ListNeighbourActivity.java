@@ -6,9 +6,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Button;
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.events.OpenUserProfileEvent;
+import com.openclassrooms.entrevoisins.model.Neighbour;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +48,13 @@ public class ListNeighbourActivity extends AppCompatActivity {
     @OnClick(R.id.add_neighbour)
     void addNeighbour() {
         AddNeighbourActivity.navigate(this);
+    }
+
+    @Subscribe
+    public void onOpenProfileNeighbour(OpenUserProfileEvent event) {
+        Neighbour neighbour = event.neighbour;
+        Intent intentOpenUserProfile = new Intent(this, UserInformationActivity.class);
+        startActivity(intentOpenUserProfile);
     }
 
 }

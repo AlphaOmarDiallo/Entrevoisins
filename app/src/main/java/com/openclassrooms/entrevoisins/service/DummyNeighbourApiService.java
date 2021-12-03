@@ -11,7 +11,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
 
     private List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
 
-
     /**
      * {@inheritDoc}
      */
@@ -35,5 +34,25 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     @Override
     public void createNeighbour(Neighbour neighbour) {
         neighbours.add(neighbour);
+    }
+
+
+    /** favorite */
+
+    private List<Neighbour> favNeighbour = DummyNeighbourGenerator.generateDummyFavNeighbours();
+
+    @Override
+    public List<Neighbour> getFavNeighbour() {
+        return favNeighbour;
+    }
+
+    @Override
+    public void deleteFavNeighbour(Neighbour neighbour) {
+        favNeighbour.remove(neighbour);
+    }
+
+    @Override
+    public void createFavNeighbour(Neighbour neighbour) {
+        favNeighbour.add(neighbour);
     }
 }

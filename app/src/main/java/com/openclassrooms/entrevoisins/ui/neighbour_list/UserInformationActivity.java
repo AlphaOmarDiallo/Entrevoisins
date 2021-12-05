@@ -1,7 +1,9 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -25,16 +27,20 @@ import butterknife.OnClick;
 public class UserInformationActivity extends AppCompatActivity {
 
     private static final String TAG = "TAG";
+
+
     private boolean inFavourite;
-    long neighbourID; // = 0;
+    long neighbourID;
     String neighbourName;
     String neighbourAvatar;
     String neighbourAddress;
     String neighbourPhone;
     String neighbourAboutMe;
     String neighbourEmail;
-    private Neighbour mNeighbour = new Neighbour(neighbourID, neighbourName, neighbourAvatar, neighbourAddress, neighbourPhone, neighbourAboutMe, neighbourEmail);
+    Boolean neighbourFavourite;
+    private Neighbour mNeighbour; // = new Neighbour(neighbourID, neighbourName, neighbourAvatar, neighbourAddress, neighbourPhone, neighbourAboutMe, neighbourEmail);
     private NeighbourApiService mApiService;
+    //public SharedPreferences mSharedPreferences;
 
     @BindView(R.id.toolbarUserInfo)
     public Toolbar mToolbarUserInfo;
@@ -89,13 +95,20 @@ public class UserInformationActivity extends AppCompatActivity {
         // retrieving neighbour
         mNeighbour = getIntent().getParcelableExtra("NEIGHBOUR");
         neighbourID = mNeighbour.getId();
-        neighbourName =  mNeighbour.getName();
+        neighbourName = mNeighbour.getName();
         neighbourAvatar = mNeighbour.getAvatarUrl();
         neighbourAddress = mNeighbour.getAddress();
         neighbourPhone = mNeighbour.getPhoneNumber();
         neighbourAboutMe = mNeighbour.getAboutMe();
         neighbourEmail = mNeighbour.getEmailAddress();
-        boolean neighbourFavourite = mNeighbour.getInFavourite();
+
+        if ( getIntent().getIntExtra("ISIN", 0 ) == 0) {
+            neighbourFavourite = false;
+        } else {
+            neighbourFavourite = true;
+        }
+
+        inFavourite = neighbourFavourite;
 
         mTextViewUserName.setText(neighbourName);
         mTextViewCardViewName.setText(neighbourName);
@@ -103,19 +116,16 @@ public class UserInformationActivity extends AppCompatActivity {
         mTextViewPhoneNumber.setText(neighbourPhone);
         mTextViewEmailAddress.setText(neighbourEmail);
         mTextViewAProposDescription.setText(neighbourAboutMe);
-        inFavourite = mNeighbour.getInFavourite();
+
         Picasso.get().load(neighbourAvatar).into(mImageViewUserAvatar);
         Log.d(TAG, "onCreate: " + inFavourite);
 
         setFavouriteFAB(inFavourite);
-
-
     }
 
     @OnClick(R.id.fabAddToFavourite)
     public void addToFavourite() {
-        //TODO - method ot add to favourite and change star color if in favourite, also add toast
-        if (!inFavourite) {
+        if (inFavourite == false) {
             inFavourite = true;
             mNeighbour.setInFavourite(true);
             mApiService.createFavNeighbour(mNeighbour);
@@ -139,13 +149,14 @@ public class UserInformationActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    private void setFavouriteFAB (Boolean favourite) {
+    private void setFavouriteFAB(Boolean favourite) {
         Context context = this;
-        if (inFavourite == true){
+        if (inFavourite == true) {
             mFloatingActionButton.setColorFilter(ContextCompat.getColor(context, R.color.colorStarGold));
         } else {
             mFloatingActionButton.setColorFilter(ContextCompat.getColor(context, R.color.colorStarGrey));
         }
     }
+
 }
 

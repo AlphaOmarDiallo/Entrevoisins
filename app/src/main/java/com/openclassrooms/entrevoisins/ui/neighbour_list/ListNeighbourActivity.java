@@ -6,14 +6,20 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.widget.Button;
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.OpenUserProfileEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +27,8 @@ import butterknife.OnClick;
 
 public class ListNeighbourActivity extends AppCompatActivity {
 
+    private static final String NEIGHBOUR = "NEIGHBOUR";
+    private static final String ISIN = "ISIN";
     // UI Components
     @BindView(R.id.tabs)
     TabLayout mTabLayout;
@@ -30,6 +38,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
     ViewPager mViewPager;
 
     ListNeighbourPagerAdapter mPagerAdapter;
+    private NeighbourApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,9 @@ public class ListNeighbourActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        mApiService = DI.getNeighbourApiService();
     }
+
 
     @OnClick(R.id.add_neighbour)
     void addNeighbour() {
@@ -54,7 +65,34 @@ public class ListNeighbourActivity extends AppCompatActivity {
     public void onOpenProfileNeighbour(OpenUserProfileEvent event) {
         Neighbour neighbour = event.neighbour;
         Intent intentOpenUserProfile = new Intent(this, UserInformationActivity.class);
+
+        List<Neighbour> favNeighbourList = mApiService.getFavNeighbour();
+        int isIn = 0;
+        for (int i = 0; i < favNeighbourList.size(); i++) {
+            if (neighbour.equals(favNeighbourList.get(i))) {
+                isIn = 1;
+            }
+        }
+        intentOpenUserProfile.putExtra(NEIGHBOUR, neighbour);
+        intentOpenUserProfile.putExtra(ISIN, isIn);
         startActivity(intentOpenUserProfile);
     }
 
+    @Subscribe
+    public void onDeleteNeighbour(DeleteNeighbourEvent event) {
+        mApiService.deleteNeighbour(event.neighbour);
+        mApiService.deleteFavNeighbour(event.neighbour);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+   @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
 }

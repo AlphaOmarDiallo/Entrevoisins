@@ -53,6 +53,17 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
 
     @Override
     public void createFavNeighbour(Neighbour neighbour) {
-        favNeighbour.add(neighbour);
+        int isIn = 0;
+        for (int i = 0; i < favNeighbour.size(); i++) {
+            if (neighbour.equals(favNeighbour.get(i))) {
+                isIn = 1;
+            }
+        }
+        if (isIn != 1 ){
+            favNeighbour.add(neighbour);
+        } else {
+            System.out.println("Already in");
+        }
+
     }
 }

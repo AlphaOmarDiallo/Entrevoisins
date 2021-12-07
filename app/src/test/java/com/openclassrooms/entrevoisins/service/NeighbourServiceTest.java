@@ -14,6 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
+
 /**
  * Unit test on Neighbour service
  */
@@ -40,4 +41,5 @@ public class NeighbourServiceTest {
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
+
 }

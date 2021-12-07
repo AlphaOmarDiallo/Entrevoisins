@@ -12,8 +12,6 @@ import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.OpenUserProfileEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -90,7 +88,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
     }
 
-   @Override
+    @Override
     protected void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();

@@ -1,9 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -28,19 +26,17 @@ public class UserInformationActivity extends AppCompatActivity {
 
     private static final String TAG = "TAG";
 
-
-    private boolean inFavourite;
-    long neighbourID;
-    String neighbourName;
-    String neighbourAvatar;
-    String neighbourAddress;
-    String neighbourPhone;
-    String neighbourAboutMe;
-    String neighbourEmail;
-    Boolean neighbourFavourite;
-    private Neighbour mNeighbour; // = new Neighbour(neighbourID, neighbourName, neighbourAvatar, neighbourAddress, neighbourPhone, neighbourAboutMe, neighbourEmail);
+    public boolean inFavourite;
+    private long neighbourID;
+    private String neighbourName;
+    private String neighbourAvatar;
+    private String neighbourAddress;
+    private String neighbourPhone;
+    private String neighbourAboutMe;
+    private String neighbourEmail;
+    public Boolean neighbourFavourite;
+    public Neighbour mNeighbour; // = new Neighbour(neighbourID, neighbourName, neighbourAvatar, neighbourAddress, neighbourPhone, neighbourAboutMe, neighbourEmail);
     private NeighbourApiService mApiService;
-    //public SharedPreferences mSharedPreferences;
 
     @BindView(R.id.toolbarUserInfo)
     public Toolbar mToolbarUserInfo;
@@ -102,7 +98,7 @@ public class UserInformationActivity extends AppCompatActivity {
         neighbourAboutMe = mNeighbour.getAboutMe();
         neighbourEmail = mNeighbour.getEmailAddress();
 
-        if ( getIntent().getIntExtra("ISIN", 0 ) == 0) {
+        if (getIntent().getIntExtra("ISIN", 0) == 0) {
             neighbourFavourite = false;
         } else {
             neighbourFavourite = true;
@@ -125,17 +121,17 @@ public class UserInformationActivity extends AppCompatActivity {
 
     @OnClick(R.id.fabAddToFavourite)
     public void addToFavourite() {
-        if (inFavourite == false) {
-            inFavourite = true;
-            mNeighbour.setInFavourite(true);
-            mApiService.createFavNeighbour(mNeighbour);
-            Log.d(TAG, "addToFavourite: " + mNeighbour.getInFavourite());
-        } else {
-            inFavourite = false;
-            mNeighbour.setInFavourite(false);
-            mApiService.deleteFavNeighbour(mNeighbour);
-            Log.d(TAG, "addToFavourite: " + mNeighbour.getInFavourite());
-        }
+            if (inFavourite == false) {
+                neighbourFavourite = true;
+                inFavourite = true;
+                mNeighbour.setInFavourite(true);
+                mApiService.createFavNeighbour(mNeighbour);
+            } else if (inFavourite == true){
+                neighbourFavourite = false;
+                inFavourite = false;
+                mNeighbour.setInFavourite(false);
+                mApiService.deleteFavNeighbour(mNeighbour);
+            }
         setFavouriteFAB(inFavourite);
     }
 

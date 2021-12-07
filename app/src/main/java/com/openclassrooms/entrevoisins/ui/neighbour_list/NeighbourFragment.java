@@ -27,11 +27,11 @@ public class NeighbourFragment<TAG> extends Fragment {
     private static final String TAG = "TAG";
     private static final String NEIGHBOUR = "NEIGHBOUR";
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
 
     /**
      * Create and return a new instance
+     *
      * @return @{@link NeighbourFragment}
      */
     public static NeighbourFragment newInstance() {
@@ -61,8 +61,8 @@ public class NeighbourFragment<TAG> extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        List<Neighbour> neighbours = mApiService.getNeighbours();
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(neighbours));
     }
 
     @Override
@@ -85,6 +85,7 @@ public class NeighbourFragment<TAG> extends Fragment {
 
     /**
      * Fired if the user clicks on a delete button
+     *
      * @param event
      */
     @Subscribe

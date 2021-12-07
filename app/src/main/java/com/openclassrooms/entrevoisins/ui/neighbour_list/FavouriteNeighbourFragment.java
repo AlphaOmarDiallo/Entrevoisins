@@ -31,7 +31,6 @@ public class FavouriteNeighbourFragment extends Fragment {
     private static final String TAG = "TAG";
     private static final String NEIGHBOUR = "NEIGHBOUR";
     private NeighbourApiService mApiService;
-    private List<Neighbour> mFavNeighbours;
     private RecyclerView mRecyclerView;
 
 
@@ -66,8 +65,8 @@ public class FavouriteNeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        mFavNeighbours = mApiService.getFavNeighbour();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbours));
+        List<Neighbour> favNeighbours = mApiService.getFavNeighbour();
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(favNeighbours));
     }
 
     @Override

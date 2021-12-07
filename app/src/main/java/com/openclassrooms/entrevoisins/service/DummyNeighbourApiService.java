@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Dummy mock for the Api
  */
-public class DummyNeighbourApiService implements  NeighbourApiService {
+public class DummyNeighbourApiService implements NeighbourApiService {
 
     private List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
 
@@ -29,6 +29,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
 
     /**
      * {@inheritDoc}
+     *
      * @param neighbour
      */
     @Override
@@ -37,7 +38,9 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     }
 
 
-    /** favorite */
+    /**
+     * favorite
+     */
 
     private List<Neighbour> favNeighbour = DummyNeighbourGenerator.generateDummyFavNeighbours();
 
@@ -59,7 +62,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
                 isIn = 1;
             }
         }
-        if (isIn != 1 ){
+        if (isIn != 1) {
             favNeighbour.add(neighbour);
         } else {
             System.out.println("Already in");

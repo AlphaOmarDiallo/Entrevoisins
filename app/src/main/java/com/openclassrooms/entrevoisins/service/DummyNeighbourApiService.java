@@ -45,17 +45,17 @@ public class DummyNeighbourApiService implements NeighbourApiService {
     private List<Neighbour> favNeighbour = DummyNeighbourGenerator.generateDummyFavNeighbours();
 
     @Override
-    public List<Neighbour> getFavNeighbour() {
+    public List<Neighbour> getFavoriteNeighbours() {
         return favNeighbour;
     }
 
     @Override
-    public void deleteFavNeighbour(Neighbour neighbour) {
+    public void deleteFavoriteNeighbour(Neighbour neighbour) {
         favNeighbour.remove(neighbour);
     }
 
     @Override
-    public void createFavNeighbour(Neighbour neighbour) {
+    public void createFavoriteNeighbour(Neighbour neighbour) {
         int isIn = 0;
         for (int i = 0; i < favNeighbour.size(); i++) {
             if (neighbour.equals(favNeighbour.get(i))) {

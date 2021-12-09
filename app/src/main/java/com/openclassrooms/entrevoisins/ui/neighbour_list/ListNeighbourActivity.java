@@ -64,13 +64,14 @@ public class ListNeighbourActivity extends AppCompatActivity {
         Neighbour neighbour = event.neighbour;
         Intent intentOpenUserProfile = new Intent(this, UserInformationActivity.class);
 
-        List<Neighbour> favNeighbourList = mApiService.getFavNeighbour();
+        List<Neighbour> favNeighbourList = mApiService.getFavoriteNeighbours();
         int isIn = 0;
         for (int i = 0; i < favNeighbourList.size(); i++) {
             if (neighbour.equals(favNeighbourList.get(i))) {
                 isIn = 1;
             }
         }
+
         intentOpenUserProfile.putExtra(NEIGHBOUR, neighbour);
         intentOpenUserProfile.putExtra(ISIN, isIn);
         startActivity(intentOpenUserProfile);
@@ -79,7 +80,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
-        mApiService.deleteFavNeighbour(event.neighbour);
+        mApiService.deleteFavoriteNeighbour(event.neighbour);
     }
 
     @Override

@@ -7,17 +7,18 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
  */
 public class OpenUserProfileEvent {
 
-        /**
-         * Neighbour data to open
-         */
-        public Neighbour neighbour;
+    /**
+     * Neighbour data to open
+     */
+    public Neighbour neighbour;
 
-        /**
-         /**
-         * Constructor.
-         * @param neighbour
-         */
-        public OpenUserProfileEvent(Neighbour neighbour) {
-            this.neighbour = neighbour;
-        }
+    /**
+     * /**
+     * Constructor.
+     *
+     * @param neighbour
+     */
+    public OpenUserProfileEvent(Neighbour neighbour) {
+        this.neighbour = neighbour;
+    }
 }

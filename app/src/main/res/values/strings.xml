@@ -12,4 +12,13 @@
     <string name="return_arrow">Return arrow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="user_avatar_from_url">User avatar</string>
+    <string name="address">Address</string>
+    <string name="email">email</string>
+    <string name="about_me">About me</string>
+    <string name="save">Save</string>
+    <string name="plus_sign_and_user">plus sign and user</string>
+    <string name="trash_can">trash_can</string>
 </resources>

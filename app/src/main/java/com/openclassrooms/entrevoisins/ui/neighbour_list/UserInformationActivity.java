@@ -12,11 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
-import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,13 +27,6 @@ public class UserInformationActivity extends AppCompatActivity {
     private static final String TAG = "TAG";
 
     public boolean inFavourite;
-    private long neighbourID;
-    private String neighbourName;
-    private String neighbourAvatar;
-    private String neighbourAddress;
-    private String neighbourPhone;
-    private String neighbourAboutMe;
-    private String neighbourEmail;
     public Boolean neighbourFavourite;
     public Neighbour mNeighbour; // = new Neighbour(neighbourID, neighbourName, neighbourAvatar, neighbourAddress, neighbourPhone, neighbourAboutMe, neighbourEmail);
     private NeighbourApiService mApiService;
@@ -90,13 +83,12 @@ public class UserInformationActivity extends AppCompatActivity {
 
         // retrieving neighbour
         mNeighbour = getIntent().getParcelableExtra("NEIGHBOUR");
-        neighbourID = mNeighbour.getId();
-        neighbourName = mNeighbour.getName();
-        neighbourAvatar = mNeighbour.getAvatarUrl();
-        neighbourAddress = mNeighbour.getAddress();
-        neighbourPhone = mNeighbour.getPhoneNumber();
-        neighbourAboutMe = mNeighbour.getAboutMe();
-        neighbourEmail = mNeighbour.getEmailAddress();
+        String neighbourName = mNeighbour.getName();
+        String neighbourAvatar = mNeighbour.getAvatarUrl();
+        String neighbourAddress = mNeighbour.getAddress();
+        String neighbourPhone = mNeighbour.getPhoneNumber();
+        String neighbourAboutMe = mNeighbour.getAboutMe();
+        String neighbourEmail = mNeighbour.getEmailAddress();
 
         if (getIntent().getIntExtra("ISIN", 0) == 0) {
             neighbourFavourite = false;
@@ -113,26 +105,26 @@ public class UserInformationActivity extends AppCompatActivity {
         mTextViewEmailAddress.setText(neighbourEmail);
         mTextViewAProposDescription.setText(neighbourAboutMe);
 
-        Picasso.get().load(neighbourAvatar).into(mImageViewUserAvatar);
+        Glide.with(this).load(neighbourAvatar).into(mImageViewUserAvatar);
         Log.d(TAG, "onCreate: " + inFavourite);
 
-        setFavouriteFAB(inFavourite);
+        setFavouriteFAB();
     }
 
     @OnClick(R.id.fabAddToFavourite)
     public void addToFavourite() {
-            if (inFavourite == false) {
-                neighbourFavourite = true;
-                inFavourite = true;
-                mNeighbour.setInFavourite(true);
-                mApiService.createFavNeighbour(mNeighbour);
-            } else if (inFavourite == true){
-                neighbourFavourite = false;
-                inFavourite = false;
-                mNeighbour.setInFavourite(false);
-                mApiService.deleteFavNeighbour(mNeighbour);
-            }
-        setFavouriteFAB(inFavourite);
+        if (inFavourite == false) {
+            neighbourFavourite = true;
+            inFavourite = true;
+            mNeighbour.setInFavourite(true);
+            mApiService.createFavoriteNeighbour(mNeighbour);
+        } else {
+            neighbourFavourite = false;
+            inFavourite = false;
+            mNeighbour.setInFavourite(false);
+            mApiService.deleteFavoriteNeighbour(mNeighbour);
+        }
+        setFavouriteFAB();
     }
 
     @Override
@@ -145,7 +137,7 @@ public class UserInformationActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    private void setFavouriteFAB(Boolean favourite) {
+    private void setFavouriteFAB() {
         Context context = this;
         if (inFavourite == true) {
             mFloatingActionButton.setColorFilter(ContextCompat.getColor(context, R.color.colorStarGold));

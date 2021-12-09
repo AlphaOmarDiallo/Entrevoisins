@@ -24,8 +24,6 @@ import java.util.List;
 
 public class NeighbourFragment<TAG> extends Fragment {
 
-    private static final String TAG = "TAG";
-    private static final String NEIGHBOUR = "NEIGHBOUR";
     private NeighbourApiService mApiService;
     private RecyclerView mRecyclerView;
 
@@ -35,9 +33,8 @@ public class NeighbourFragment<TAG> extends Fragment {
      * @return @{@link NeighbourFragment}
      */
     public static NeighbourFragment newInstance() {
-        NeighbourFragment fragment = new NeighbourFragment();
 
-        return fragment;
+        return new NeighbourFragment();
     }
 
     @Override
@@ -86,7 +83,7 @@ public class NeighbourFragment<TAG> extends Fragment {
     /**
      * Fired if the user clicks on a delete button
      *
-     * @param event
+     * @param event-
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {

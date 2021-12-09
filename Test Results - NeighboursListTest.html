@@ -2,7 +2,7 @@
 <html xmlns:str="http://exslt.org/strings" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Test Results &mdash; UserInformationActivityTest.addToFavourite</title>
+        <title>Test Results &mdash; NeighboursListTest</title>
         <style type="text/css">
           html {
             height: 100%
@@ -572,9 +572,9 @@ jQuery.cookie = function(name, value, options) {
     <body>
         <div id="container">
             <div id="header">
-                <div class="time" xmlns="">1.85 s</div>
+                <div class="time" xmlns="">17.55 s</div>
                 <h1>
-                    UserInformationActivityTest.addToFavourite: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">1 total, </span><span class="failed">1 failed</span></strong>
+                    NeighboursListTest: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">5 total, </span><span class="passed">5 passed</span></strong>
                 </h1>
                 <div id="treecontrol">
                     <ul>
@@ -591,20 +591,35 @@ jQuery.cookie = function(name, value, options) {
             </div>
             <div id="content">
                 <ul id="tree">
-                    <li xmlns="" class="level top failed open">
+                    <li xmlns="" class="level top open">
                         <span><em class="time">
-                                <div class="time">1.85 s</div>
-                            </em>com.openclassrooms.entrevoisins.ui.neighbour_list.UserInformationActivityTest</span>
+                                <div class="time">17.55 s</div>
+                            </em>com.openclassrooms.entrevoisins.neighbour_list.NeighboursListTest</span>
                         <ul>
-                            <li class="level test failed open">
+                            <li class="level test">
                                 <span><em class="time">
-                                        <div class="time">1.85 s</div>
-                                    </em><em class="status">failed</em>addToFavourite</span>
-                                <ul>
-                                    <li class="text">
-                                        <span class="stderr">java.lang.AssertionError<br/>	at org.junit.Assert.fail(Assert.java:86)<br/>	at org.junit.Assert.assertTrue(Assert.java:41)<br/>	at org.junit.Assert.assertTrue(Assert.java:52)<br/>	at com.openclassrooms.entrevoisins.ui.neighbour_list.UserInformationActivityTest.addToFavourite(UserInformationActivityTest.java:16)<br/>	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>	at java.base/java.lang.reflect.Method.invoke(Method.java:566)<br/>	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)<br/>	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)<br/>	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)<br/>	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)<br/>	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)<br/>	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)<br/>	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)<br/>	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)<br/>	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)<br/>	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)<br/>	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)<br/>	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)<br/>	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)<br/>	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)<br/>	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)<br/>	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)<br/>	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)<br/>	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)<br/>	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>	at java.base/java.lang.reflect.Method.invoke(Method.java:566)<br/>	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)<br/>	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)<br/>	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)<br/>	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)<br/>	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)<br/>	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:121)<br/>	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br/>	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>	at java.base/java.lang.reflect.Method.invoke(Method.java:566)<br/>	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)<br/>	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)<br/>	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)<br/>	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)<br/>	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)<br/>	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)<br/>	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)<br/>	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)<br/>	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)<br/>	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)<br/>	at java.base/java.lang.Thread.run(Thread.java:834)<br/></span>
-                                    </li>
-                                </ul>
+                                        <div class="time">3.65 s</div>
+                                    </em><em class="status">passed</em>MyNeighbourList_OpenUserFullProfileAction_ShouldOpenUserProfileWithItsData</span>
+                            </li>
+                            <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1.27 s</div>
+                                    </em><em class="status">passed</em>myNeighboursList_shouldNotBeEmpty</span>
+                            </li>
+                            <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1.48 s</div>
+                                    </em><em class="status">passed</em>UserInformationActivity_nameIsDisplayed_ShouldMatchUserNameThatWasClickedOn</span>
+                            </li>
+                            <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1.58 s</div>
+                                    </em><em class="status">passed</em>myNeighboursList_deleteAction_shouldRemoveItem</span>
+                            </li>
+                            <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">9.57 s</div>
+                                    </em><em class="status">passed</em>FavouriteNeighbourFragment_ShouldOnlyDisplayFavoriteNeighbours</span>
                             </li>
                         </ul>
                     </li>
@@ -612,7 +627,7 @@ jQuery.cookie = function(name, value, options) {
             </div>
         </div>
         <div id="footer">
-            <p>Generated by Android Studio on 12/5/21, 4:37 PM</p>
+            <p>Generated by Android Studio on </p>
         </div>
     </body>
 </html>

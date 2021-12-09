@@ -10,35 +10,52 @@ import java.util.Objects;
  */
 public class Neighbour implements Parcelable {
 
-    /** Identifier */
+    /**
+     * Identifier
+     */
     private long id;
 
-    /** Full name */
+    /**
+     * Full name
+     */
     private String name;
 
-    /** Avatar */
+    /**
+     * Avatar
+     */
     private String avatarUrl;
 
-    /** Address */
+    /**
+     * Address
+     */
     private String address;
 
-    /** Phone number */
+    /**
+     * Phone number
+     */
     private String phoneNumber;
 
-    /** Email address */
+    /**
+     * Email address
+     */
     private String emailAddress;
 
-    /** About me */
+    /**
+     * About me
+     */
     private String aboutMe;
 
-    /** Is in favourite */
-    private Boolean isInFavourite = false;
+    /**
+     * Is in favourite
+     */
+    private Boolean isInFavorite = false;
 
     /**
      * Constructor
-     * @param id
-     * @param name
-     * @param avatarUrl
+     *
+     * @param id-
+     * @param name-
+     * @param avatarUrl-
      */
     public Neighbour(long id, String name, String avatarUrl, String address,
                      String phoneNumber, String aboutMe, String emailAddress) {
@@ -108,11 +125,11 @@ public class Neighbour implements Parcelable {
     }
 
     public Boolean getInFavourite() {
-        return isInFavourite;
+        return isInFavorite;
     }
 
     public void setInFavourite(Boolean inFavourite) {
-        isInFavourite = inFavourite;
+        isInFavorite = inFavourite;
     }
 
 
@@ -128,7 +145,10 @@ public class Neighbour implements Parcelable {
     public int hashCode() {
         return Objects.hash(id);
     }
-    /** about parcelable */
+
+    /**
+     * about parcelable
+     */
     @Override
     public int describeContents() {
         return 0;
@@ -143,7 +163,7 @@ public class Neighbour implements Parcelable {
         parcel.writeString(phoneNumber);
         parcel.writeString(emailAddress);
         parcel.writeString(aboutMe);
-        parcel.writeByte((byte) (isInFavourite == null ? 0 : isInFavourite ? 1 : 2));
+        parcel.writeByte((byte) (isInFavorite == null ? 0 : isInFavorite ? 1 : 2));
     }
 
     protected Neighbour(Parcel in) {
@@ -155,7 +175,7 @@ public class Neighbour implements Parcelable {
         emailAddress = in.readString();
         aboutMe = in.readString();
         byte tmpIsInFavourite = in.readByte();
-        isInFavourite = tmpIsInFavourite == 0 ? null : tmpIsInFavourite == 1;
+        isInFavorite = tmpIsInFavourite == 0 ? null : tmpIsInFavourite == 1;
     }
 
     public static final Creator<Neighbour> CREATOR = new Creator<Neighbour>() {

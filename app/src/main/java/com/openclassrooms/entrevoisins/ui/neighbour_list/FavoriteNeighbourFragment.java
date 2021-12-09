@@ -23,25 +23,23 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FavouriteNeighbourFragment#newInstance} factory method to
+ * Use the {@link FavoriteNeighbourFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FavouriteNeighbourFragment extends Fragment {
+public class FavoriteNeighbourFragment extends Fragment {
 
-    private static final String TAG = "TAG";
-    private static final String NEIGHBOUR = "NEIGHBOUR";
     private NeighbourApiService mApiService;
     private RecyclerView mRecyclerView;
 
 
     /**
      * Create and return a new instance
+     *
      * @return @{@link NeighbourFragment}
      */
-    public static FavouriteNeighbourFragment newInstance() {
-        FavouriteNeighbourFragment fragment = new FavouriteNeighbourFragment();
+    public static FavoriteNeighbourFragment newInstance() {
 
-        return fragment;
+        return new FavoriteNeighbourFragment();
     }
 
     @Override
@@ -65,7 +63,7 @@ public class FavouriteNeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        List<Neighbour> favNeighbours = mApiService.getFavNeighbour();
+        List<Neighbour> favNeighbours = mApiService.getFavoriteNeighbours();
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(favNeighbours));
     }
 
@@ -89,7 +87,8 @@ public class FavouriteNeighbourFragment extends Fragment {
 
     /**
      * Fired if the user clicks on a delete button
-     * @param event
+     *
+     * @param event-
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {

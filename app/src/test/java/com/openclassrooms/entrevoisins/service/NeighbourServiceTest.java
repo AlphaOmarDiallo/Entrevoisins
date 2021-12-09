@@ -11,6 +11,7 @@ import org.junit.runners.JUnit4;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
@@ -33,6 +34,18 @@ public class NeighbourServiceTest {
         List<Neighbour> neighbours = service.getNeighbours();
         List<Neighbour> expectedNeighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
         assertThat(neighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
+    }
+
+    @Test
+    public void getFavNeighboursWithSuccess() {
+        List<Neighbour> favNeighbours = service.getFavoriteNeighbours();
+        List<Neighbour> neighbours = service.getNeighbours();
+        List<Neighbour> expectedFavNeighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
+        favNeighbours.addAll(neighbours);
+        long favNeighbourSize = favNeighbours.size();
+        long neighbourSize = neighbours.size();
+        assertEquals(favNeighbourSize, neighbourSize);
+        assertThat(favNeighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedFavNeighbours.toArray()));
     }
 
     @Test

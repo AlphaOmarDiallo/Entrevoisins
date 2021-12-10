@@ -1,6 +1,8 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import com.openclassrooms.entrevoisins.di.DI;
@@ -27,10 +29,11 @@ public class UserInformationActivityTest {
     @Test
     public void addToFavoriteTest() {
         List<Neighbour> favList = service.getFavoriteNeighbours();
-        Neighbour neighbour1 = mock(Neighbour.class);
-        Neighbour neighbour2 = mock(Neighbour.class);
-        Neighbour neighbour3 = mock(Neighbour.class);
-        Neighbour neighbour4 = mock(Neighbour.class);
+        Neighbour neighbour1 = service.getNeighbours().get(0);
+        Neighbour neighbour2 = service.getNeighbours().get(1);
+        Neighbour neighbour3 = service.getNeighbours().get(2);
+        Neighbour neighbour4 = service.getNeighbours().get(3);
+        favList.clear();
         favList.add(neighbour1);
         favList.add(neighbour2);
         favList.add(neighbour3);
@@ -38,6 +41,10 @@ public class UserInformationActivityTest {
         long favListSize = favList.size();
         long expectedSize = 4;
         assertEquals(expectedSize, favListSize);
+        assertTrue(service.getFavoriteNeighbours().contains(neighbour1));
+        assertTrue(service.getFavoriteNeighbours().contains(neighbour2));
+        assertTrue(service.getFavoriteNeighbours().contains(neighbour3));
+        assertTrue(service.getFavoriteNeighbours().contains(neighbour4));
     }
 
 }

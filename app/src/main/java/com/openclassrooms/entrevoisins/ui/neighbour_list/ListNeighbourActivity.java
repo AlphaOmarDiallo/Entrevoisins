@@ -77,6 +77,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
         startActivity(intentOpenUserProfile);
     }
 
+
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);

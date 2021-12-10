@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.neighbour_list.FavoriteNeighbourFragment"
-    tools:listitem="@layout/fragment_favourite_neighbour" />
+    tools:listitem="@layout/fragment_favorite_neighbour" />

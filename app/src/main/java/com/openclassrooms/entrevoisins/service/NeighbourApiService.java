@@ -18,13 +18,13 @@ public interface NeighbourApiService {
 
     /**
      * Deletes a neighbour
-     * @param neighbour
+     * @param neighbour-
      */
     void deleteNeighbour(Neighbour neighbour);
 
     /**
      * Create a neighbour
-     * @param neighbour
+     * @param neighbour-
      */
     void createNeighbour(Neighbour neighbour);
 

@@ -1,6 +1,6 @@
 # Entrevoisin
 
-Ce dépôt contient une mini-application pour le P3 du parcours **Grande École du Numérique**. 
+This repository contains a mini-application for project number 3 **Grande École du Numérique**. 
 This application is the property of the startup Entrevoisin. It helps neighbours to connect in order to exchange goods and services or meet and share moments. 
 
 ## Project setup
